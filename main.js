@@ -17,9 +17,26 @@ async function getWeather(city) {
 }
 
 function showWeather(weather) {
-  const weatherIcon = document.querySelector('.weather .weather-now-icon');
+  const weatherIcon = document.querySelector('.weather-now-icon');
   const degrees = document.querySelector('.degrees');
-
+  const feelsLike = document.querySelector('.feels-like');
+  const tempMin = document.querySelector('.temp-min');
+  const tempMax = document.querySelector('.temp-max');
+  const wind = document.querySelector('.wind');
+  const humidity = document.querySelector('.humidity');
+  const pressure = document.querySelector('.pressure');
   weatherIcon.src = `${WEATHER_ICON_PREFIX_URL}/${weather.weather[0].icon}.png`;
   degrees.innerHTML = `${Math.round(weather.main.temp)} &#8451`;
+  feelsLike.innerHTML = `Temperatura resimtita ${Math.round(
+    weather.main.feels_like,
+  )} &#8451`;
+  tempMin.innerHTML = `Temperatura minima ${Math.round(
+    weather.main.temp_min,
+  )} &#8451`;
+  tempMax.innerHTML = `Temperatura maxima ${Math.round(
+    weather.main.temp_max,
+  )} &#8451`;
+  wind.innerHTML = `Viteza vantului ${weather.wind.speed}`;
+  humidity.innerHTML = `Umiditate ${weather.main.humidity}`;
+  pressure.innerHTML = `Presiune atmosferica ${weather.main.pressure}`;
 }
