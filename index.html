@@ -5,10 +5,11 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vremea</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
+  <body class="flex-container">
     <h1>Weather App</h1>
-    <section>
+    <section class="search-bar flex-container">
       <input
         type="text"
         name="text-search"
@@ -21,6 +22,24 @@
         value="Afiseaza vremea"
         onclick="handleWeather()"
       />
+    </section>
+
+    <section class="weather grid-container">
+      <div>
+        <p>Conditii meteo</p>
+        <img class="weather-now-icon" src="" height="100px" width="100px" />
+        <h2 class="degrees"></h2>
+      </div>
+      <div>
+        <p class="feels-like"></p>
+        <p class="temp-min"></p>
+        <p class="temp-max"></p>
+      </div>
+      <div>
+        <p class="wind"></p>
+        <p class="humidity"></p>
+        <p class="pressure"></p>
+      </div>
     </section>
     <script src="/main.js"></script>
   </body>
