@@ -54,11 +54,15 @@
 }
 
 .weather {
-  background-color: lightgreen;
   max-width: 900px;
+  width: 100%;
   padding: 40px;
   opacity: 0;
   transition: opacity 0.5s ease-in;
+}
+
+.weather div:first-child {
+  text-align: center;
 }
 
 .loading {
@@ -71,6 +75,7 @@
   visibility: hidden;
   position: fixed;
   animation: spin 1s infinite linear;
+  top: 45%;
 }
 
 .loading.display {
