@@ -4,8 +4,18 @@ const APP_ID = '69518b1f8f16c35f8705550dc4161056';
 
 async function handleWeather() {
   const city = document.querySelector('.city-search').value;
+  const loading = document.querySelector('.loading');
+  loading.classList.add('display');
   const weather = await getWeather(city);
+  loading.classList.remove('display');
+
+  if (weather.cod !== 200) {
+    alert(`Ceva nu a mers bine: ${weather.cod} - ${weather.message}`);
+  }
+
   showWeather(weather);
+  const weatherSection = document.querySelector('.weather');
+  weatherSection.style.opacity = 1;
 }
 
 async function getWeather(city) {
@@ -40,3 +50,9 @@ function showWeather(weather) {
   humidity.innerHTML = `Umiditate ${weather.main.humidity}`;
   pressure.innerHTML = `Presiune atmosferica ${weather.main.pressure}`;
 }
+
+document.addEventListener('keydown', function (event) {
+  if (event.key === 'Enter') {
+    handleWeather();
+  }
+});
