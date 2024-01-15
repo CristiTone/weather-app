@@ -14,8 +14,6 @@ async function handleWeather() {
   }
 
   showWeather(weather);
-  const weatherSection = document.querySelector('.weather');
-  weatherSection.style.opacity = 1;
 }
 
 async function getWeather(city) {
@@ -27,6 +25,7 @@ async function getWeather(city) {
 }
 
 function showWeather(weather) {
+  const location = document.querySelector('.location')
   const weatherIcon = document.querySelector('.weather-now-icon');
   const degrees = document.querySelector('.degrees');
   const feelsLike = document.querySelector('.feels-like');
@@ -35,6 +34,7 @@ function showWeather(weather) {
   const wind = document.querySelector('.wind');
   const humidity = document.querySelector('.humidity');
   const pressure = document.querySelector('.pressure');
+  location.innerHTML = `Conditii meteo in: ${weather.name}`
   weatherIcon.src = `${WEATHER_ICON_PREFIX_URL}/${weather.weather[0].icon}.png`;
   degrees.innerHTML = `${Math.round(weather.main.temp)} &#8451`;
   feelsLike.innerHTML = `Temperatura resimtita ${Math.round(
@@ -49,6 +49,9 @@ function showWeather(weather) {
   wind.innerHTML = `Viteza vantului ${weather.wind.speed}`;
   humidity.innerHTML = `Umiditate ${weather.main.humidity}`;
   pressure.innerHTML = `Presiune atmosferica ${weather.main.pressure}`;
+
+  const weatherSection = document.querySelector('.weather');
+  weatherSection.style.opacity = 1;
 }
 
 document.addEventListener('keydown', function (event) {
@@ -56,3 +59,18 @@ document.addEventListener('keydown', function (event) {
     handleWeather();
   }
 });
+
+navigator.geolocation.getCurrentPosition((position) => {
+  getCurrentPositionWeather(
+    position.coords.latitude,
+    position.coords.longitude
+  );
+});
+
+async function getCurrentPositionWeather(lat, lon) {
+  const response = await fetch(
+    `${WEATHER_URL}?appid=${APP_ID}&units=metric&lat=${lat}&lon=${lon}`
+  );
+  const result = await response.json();
+  showWeather(result);
+}
